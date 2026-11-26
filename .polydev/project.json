@@ -1,0 +1,13 @@
+{
+  "name": "Motion video",
+  "templateId": "empty",
+  "agent": {
+    "profile": "light",
+    "planApproval": true,
+    "askUser": true
+  },
+  "git": {
+    "repo": "ranipuja2207-alt/Motion_video",
+    "branch": "main"
+  }
+}

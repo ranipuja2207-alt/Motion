@@ -1,0 +1,30 @@
+import { compose, DefaultComposer } from "remotion";
+import { MainComposition } from "remotion";
+import { Audio } from "remotion";
+import { useCurrentFrame } from "remotion";
+import { interpolate } from "remotion";
+import { theme } from "../theme";
+
+// Duration: voiceover is 30.469042 seconds
+const DURATION = 30.469042;
+const FPS = 30;
+
+export const MainComposition: MainComposition = () => {
+  const audio = Audio.useSound("./voiceover.mp3");
+  const frame = useCurrentFrame();
+
+  // Calculate which part of the audio we're at
+  const audioTime = (frame / FPS).toFixed(3);
+
+  return compose(
+    DefaultComposer,
+    () => {
+      // Background mesh animation
+      return null;
+    },
+    () => {
+      // Main content area
+      return null;
+    }
+  );
+};

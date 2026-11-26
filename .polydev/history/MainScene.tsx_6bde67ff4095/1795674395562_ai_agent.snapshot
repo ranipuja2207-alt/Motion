@@ -1,0 +1,86 @@
+import { MainComposition, useVideoConfig } from "remotion";
+import { useCurrentFrame } from "remotion";
+import { BgMesh } from "../components/BgMesh";
+import { Grade } from "../components/Grade";
+import { Grain } from "../components/Grain";
+import { Vignette } from "../components/Vignette";
+import { Entrance } from "../components/Entrance";
+import { WordReveal } from "../components/WordReveal";
+import { LineReveal } from "../components/LineReveal";
+import { theme } from "../theme";
+
+// Main composition
+export const MainComposition: MainComposition = () => {
+  const frame = useCurrentFrame();
+  const { fps } = useVideoConfig();
+
+  // Hook animation - first 24 frames
+  const hook = (
+    <div style={{ position: "relative", textAlign: "center" }}>
+      <div style={{ fontSize: "140px", fontWeight: 700, color: theme.colors.primary, textShadow: "0 0 40px rgba(124,58,237,0.4)" }}>
+        MOTION VIDEO
+      </div>
+      <div style={{ marginTop: "0.8em", fontSize: "42px", color: theme.colors.textDim }}>
+        SYNCHRONIZED WITH VOICEOVER
+      </div>
+    </div>
+  );
+
+  // Middle section - 3 beats of 18 frames each
+  const beat1 = (
+    <div style={{ textAlign: "center", margin: "3em 0" }}>
+      <WordReveal text="BEAT 1" delay={0} highlightWord={1} />
+    </div>
+  );
+
+  const beat2 = (
+    <div style={{ textAlign: "center", margin: "3em 0" }}>
+      <LineReveal
+        lines={["BEAT", "2", "REVEAL"]}
+        delay={6} // 6 frames delay
+        highlightLine={1}
+      />
+    </div>
+  );
+
+  const beat3 = (
+    <div style={{ textAlign: "center", margin: "3em 0" }}>
+      <WordReveal text="PAYOFF" delay={12} highlightWord={0} />
+    </div>
+  );
+
+  return (
+    <MainComposition.Root>
+      <BgMesh />
+      <Grade />
+      <Grain />
+      <Vignette />
+      <div style={{ position: "absolute", inset: 0, width: "100%", height: "100%" }}>
+        {hook}
+        <Entrance delay={0}>
+          <div style={{ margin: "2em 0", fontSize: "48px", fontWeight: 600, color: theme.colors.primary }}>
+            SYNCHRONIZED
+          </div>
+        </Entrance>
+        {beat1}
+        {beat2}
+        {beat3}
+        <Entrance delay={24} fromScale={0.8} fromY={-20}>
+          <div style={{ fontSize: "52px", fontWeight: 700, color: theme.colors.primary }}>
+            MOTION
+          </div>
+          <div style={{ fontSize: "42px", color: theme.colors.textDim, marginTop: "0.5em" }}>
+            VIDEO
+          </div>
+        </Entrance>
+        <div style={{ margin: "4em 0", textAlign: "center" }}>
+          <LineReveal
+            lines={["SYNCED", "WITH", "AUDIO"]}
+            delay={36}
+            highlightLine={0}
+          />
+        </div>
+      </div>
+    </MainComposition.Root>
+  );
+};

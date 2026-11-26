@@ -1,0 +1,10 @@
+import { registerRoot } from "./index";
+import { MainComposition } from "./scenes/MainScene";
+
+// Register the composition
+registerRoot();
+
+// This is the main composition
+export default function Root() {
+  return <MainComposition.MainComposition />;
+}
